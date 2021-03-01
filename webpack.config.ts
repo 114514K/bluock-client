@@ -1,4 +1,6 @@
 import path from "path";
+import sass from "sass";
+import fibers from "fibers";
 import { Configuration } from "webpack";
 
 const isDevelopment = process.env.NODE_ENV === "production";
@@ -31,7 +33,23 @@ const config: Configuration = {
           { loader: "ts-loader" }
         ]
       },
-      // TODO: Add loaders to load moduled SASS
+      {
+        test: /.module.scss?/,
+        exclude: /node_modules/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: sass,
+              sassOptions: {
+                fiber: fibers
+              }
+            },
+          },
+        ]
+      }
     ]
   },
   output: {
