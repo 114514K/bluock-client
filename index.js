@@ -8,7 +8,7 @@ function createWindow() {
     height: 480
   });
   win.webContents.openDevTools();
-  win.loadURL(`localhost`);
+  win.loadURL(`http://localhost:8080`);
 }
 
 app.on("ready", () => {

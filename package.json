@@ -29,9 +29,25 @@
     "tsc": "^1.20150623.0",
     "typescript": "^4.2.2",
     "webpack": "^5.24.2",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "electron": "^11.3.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "devServer": "webpack-cli serve",
+    "css": "tsm 'src/style/**/*.module.scss' -n dashes -e default",
+    "css:once": "yarn css",
+    "css:watch": "yarn css -w",
+    "lint": "yarn lint:eslint && yarn lint:stylelint && yarn lint:prettier",
+    "fix": "yarn fix:eslint; yarn fix:stylelint; yarn fix:prettier",
+    "lint:eslint": "eslint 'src/**/*.[jt]s?(x)'",
+    "lint:stylelint": "stylelint 'src/**/*.module.scss'",
+    "lint:prettier": "prettier -c 'src/**/*.{module.scss,[jt]s?(x)}'",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:stylelint": "yarn lint:stylelint --fix",
+    "fix:prettier": "yarn lint:prettier -w"
   }
 }
