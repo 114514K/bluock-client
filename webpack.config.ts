@@ -22,7 +22,12 @@ const config: Configuration = {
         test: /\.tsx?/,
         exclude: /node_modules/,
         use: [
-          // TODO: Add babel-loader
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"]
+            }
+          },
           { loader: "ts-loader" }
         ]
       },
