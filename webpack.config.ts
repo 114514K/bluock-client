@@ -2,12 +2,14 @@ import path from "path";
 import sass from "sass";
 import fibers from "fibers";
 import { Configuration } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 
-const isDevelopment = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "production";
 const baseURL = process.env.BASE_URL ?? "/";
 
 const config: Configuration = {
-  mode: isDevelopment ? "development" : "production",
+  mode: isProduction ? "production" : "development",
   entry: {
     app: path.join(__dirname, "src", "index.tsx")
   },
@@ -16,7 +18,19 @@ const config: Configuration = {
     alias: { /* TODO: Add this as needed */ }
   },
   plugins: [
-    // TODO: Add plugin to inject script in the HTML file, and copy matters into the output directory
+    new HtmlWebpackPlugin({
+      inject: "head",
+      scriptLoading: "defer",
+      minify: isProduction,
+      template: path.join(__dirname, "src", "template.html")
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, "public")
+        }
+      ]
+    })
   ],
   module: {
     rules: [
