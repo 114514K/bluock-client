@@ -21,7 +21,7 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       inject: "head",
       scriptLoading: "defer",
-      minify: isProduction,
+      minify: false,
       template: path.join(__dirname, "src", "template.html")
     }),
     new CopyWebpackPlugin({
@@ -44,7 +44,14 @@ const config: Configuration = {
               presets: ["@babel/preset-env"]
             }
           },
-          { loader: "ts-loader" }
+          {
+            loader: "ts-loader",
+            options: {
+              compilerOptions: {
+                module: "ESNext"
+              }
+            }
+          }
         ]
       },
       {
