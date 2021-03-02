@@ -59,7 +59,16 @@ const config: Configuration = {
         exclude: /node_modules/,
         use: [
           { loader: "style-loader" },
-          { loader: "css-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: isProduction ? "[hash:base64:16]" : "[name]__[local]",
+                exportLocalsConvention: "dashesOnly"
+              }
+            }
+          },
           {
             loader: "sass-loader",
             options: {
