@@ -15,7 +15,9 @@ const config: Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".module.scss"],
-    alias: { /* TODO: Add this as needed */ }
+    alias: {
+      "~": path.join(__dirname, "src")
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -59,7 +61,16 @@ const config: Configuration = {
         exclude: /node_modules/,
         use: [
           { loader: "style-loader" },
-          { loader: "css-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: isProduction ? "[hash:base64:16]" : "[name]__[local]",
+                exportLocalsConvention: "dashesOnly"
+              }
+            }
+          },
           {
             loader: "sass-loader",
             options: {
