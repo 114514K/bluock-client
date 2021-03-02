@@ -49,6 +49,16 @@
     "devServer": "webpack-cli serve",
     "css": "tsm 'src/styles/**/*.module.scss' -n dashes -e default",
     "css:once": "yarn css",
-    "css:watch": "yarn css -w"
+    "css:watch": "yarn css -w",
+    "lint": "yarn lint:eslint && yarn lint:stylelint && yarn lint:prettier",
+    "lint:eslint": "eslint 'src/**/*.ts?(x)'",
+    "lint:stylelint": "stylelint 'src/**/*.module.scss'",
+    "lint:prettier": "prettier 'src/**/*.{ts?(x),module.scss}' -c",
+    "fix": "yarn fix:prettier && yarn fix:eslint && yarn fix:stylelint",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:stylelint": "yarn lint:stylelint --fix",
+    "fix:prettier": "yarn lint:prettier -w",
+    "check": "echo 'Maybe you meant to run `yarn lint`.' && yarn lint",
+    "format": "echo 'Maybe you meant to run `yarn fix`.' && yarn fix"
   }
 }
