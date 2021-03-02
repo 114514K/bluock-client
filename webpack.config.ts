@@ -15,7 +15,9 @@ const config: Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".module.scss"],
-    alias: { /* TODO: Add this as needed */ }
+    alias: {
+      "~": path.join(__dirname, "src")
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({

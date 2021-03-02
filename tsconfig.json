@@ -5,10 +5,12 @@
     "outDir": "./dist",
     "strict": true,
     "baseUrl": "./src",
-    "paths": {},
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "~/*": ["./*"]
+    }
   }
 }
